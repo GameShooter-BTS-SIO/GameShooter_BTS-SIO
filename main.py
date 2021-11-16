@@ -1,22 +1,84 @@
+import keyboard
+import os
+import random
+import time
 
-import pygame
-pygame.init()
-(largeur, hauteur) = (500, 800)
-screen = pygame.display.set_mode((largeur, hauteur))
-pygame.display.set_caption('Game Shooter')
-pygame.display.update()
-running = True
-x=150
-y=60
+#\033[",cpt3, ";1H"
+class player:
+    vie = 20
+    attaque = 5
+    apparence = "/-\ \n"
+    tir = " |"
+    espace="\n\n\n"
+    espace2=""
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-    pygame.draw.rect(screen, (200,128,50), pygame.Rect(150, 60, 90, 90))
-    pygame.draw.rect(screen, (200,128,50), pygame.Rect(250, 60, 90, 90))
-    pygame.draw.rect(screen, (200,128,50), pygame.Rect(200, 150, 90, 300))
-    pygame.display.flip()
-    size = (50, 50)
-    radius = 25
-    pygame.draw.circle(size, (255, 0, 0), pygame.surface(radius, radius) )
+
+class ennemis:
+    vie = 10
+    attaque = 2
+    apparence = "\_/\n"
+
+
+pseudo = str(input("Entrer votre pseudo.\n"))
+for cpt1 in range(5):
+    cpt2 = 5 - cpt1
+    clear = lambda: os.system('cls')
+    clear()
+    print("Bienvenu", pseudo, "\nVous avez", player.vie, "points de vie.\n")
+    print("La partie commence dans", cpt2, "secondes.")
+    time.sleep(1)
+clear = lambda: os.system('cls')
+clear()
+
+
+espace=str()
+clear = lambda: os.system('cls')
+clear()
+jeu = True
+cpt = 1
+
+while jeu == True:
+
+    clear = lambda: os.system('cls')
+    clear()
+
+    print(ennemis.apparence)
+    
+
+    if keyboard.is_pressed("t"):
+        player.espace="\n\n\n\n\n"
+        player.espace2=""
+        clear = lambda: os.system('cls')
+        clear()
+        
+        for cpt3 in range(0, 5):
+            print(player.espace , player.tir)
+            print(player.espace2 , player.apparence)
+            player.espace=player.espace[2:]
+            if cpt3<=2 :
+                player.espace2=player.espace2+"\n"
+            time.sleep(0.1)
+            clear = lambda: os.system('cls')
+            clear()
+
+    print("\n\n\n" ,player.apparence)
+
+    if keyboard.is_pressed("q"):
+        clear = lambda: os.system('cls')
+        clear()
+
+        if cpt < 50:
+            cpt = cpt + 1
+            player.apparence = " " + player.apparence
+            player.tir = " " + player.tir
+            print(player.apparence)
+
+    if keyboard.is_pressed("p"):
+        clear = lambda: os.system('cls')
+        clear()
+
+        if cpt >= 2:
+            cpt = cpt - 1
+            player.tir = player.tir[1:]
+            player.apparence = player.apparence[1:]
+            print(player.apparence)
